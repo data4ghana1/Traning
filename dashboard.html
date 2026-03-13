@@ -3,60 +3,820 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard - CleanHeart Solutions</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
         }
-        header {
-            background-color: #007bff;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             color: white;
-            width: 100%;
-            padding: 10px;
+            padding: 8px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        nav {
+
+        .status-left, .status-right {
             display: flex;
-            gap: 15px;
+            gap: 4px;
+            align-items: center;
         }
-        nav a {
+
+        /* Navigation Bar */
+        .nav-bar {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             color: white;
-            text-decoration: none;
-            padding: 7px 14px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 20px;
+            z-index: 99;
         }
-        main {
-            width: 90%;
-            max-width: 1200px;
-            padding: 20px;
+
+        .nav-logo {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .nav-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Search Bar */
+        .search-container {
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .search-box {
+            flex: 1;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 16px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Welcome Card */
+        .welcome-card {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border-radius: 24px;
+            padding: 32px 24px;
+            margin: 16px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-card::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -50px;
+            right: -50px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .welcome-card h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .welcome-card p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 12px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .balance-label {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .balance-amount {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 24px;
+        }
+
+        .load-wallet-btn {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
+            color: #6366f1;
+            border: none;
+            border-radius: 20px;
+            padding: 12px 32px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .load-wallet-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .stat-card {
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-card.purple {
+            background: linear-gradient(135deg, #e9d5ff 0%, #f3e8ff 100%);
+        }
+
+        .stat-card.green {
+            background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%);
+        }
+
+        .stat-card.blue {
+            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+        }
+
+        .stat-card.pink {
+            background: linear-gradient(135deg, #fbcfe8 0%, #fce7f3 100%);
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 28px;
+        }
+
+        .stat-card.purple .stat-icon {
+            background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+            color: white;
+        }
+
+        .stat-card.green .stat-icon {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            color: white;
+        }
+
+        .stat-card.blue .stat-icon {
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            color: white;
+        }
+
+        .stat-card.pink .stat-icon {
+            background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #111;
+        }
+
+        /* Pills Container */
+        .pills-container {
+            display: flex;
+            gap: 12px;
+            padding: 0 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            margin-bottom: 24px;
+        }
+
+        .pills-container::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .pills-container::-webkit-scrollbar-track {
+            background: #f0f0f0;
+        }
+
+        .pills-container::-webkit-scrollbar-thumb {
+            background: #999;
+            border-radius: 2px;
+        }
+
+        .pill {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 24px;
+            padding: 10px 20px;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pill:hover {
+            transform: scale(1.05);
+        }
+
+        .pill.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .pill.orange {
+            border-color: #f59e0b;
+            color: #f59e0b;
+        }
+
+        .pill.blue {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .pill.green {
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        .pill.purple {
+            border-color: #a855f7;
+            color: #a855f7;
+        }
+
+        .pill.red {
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        /* Sales Overview */
+        .sales-overview {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 0 16px 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .sales-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .sales-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .sales-date {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .search-btn {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+
+        .search-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 200px;
+            margin-top: 24px;
+        }
+
+        .chart-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .day-label {
+            font-size: 11px;
+            color: #999;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .revenue-info {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .revenue-dot {
+            width: 12px;
+            height: 12px;
+            background: #3b82f6;
+            border-radius: 50%;
+        }
+
+        .revenue-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .revenue-day {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .revenue-amount {
+            font-size: 14px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 24px 16px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .footer p {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .footer-credit {
+            font-size: 12px;
+            margin-top: 12px;
+            color: #999;
+        }
+
+        .footer-credit a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .balance-amount {
+                font-size: 28px;
+            }
+
+            .stat-value {
+                font-size: 20px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                padding: 24px;
+            }
+
+            .welcome-card {
+                margin: 24px;
+            }
+
+            .sales-overview {
+                margin: 0 24px 24px;
+            }
+        }
+
+        /* Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        /* Loading State */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">Logo</div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <h1>Dashboard</h1>
-        <p>Content goes here.</p>
-    </main>
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span>10:31</span>
+            <span>→ Audiomarc</span>
+        </div>
+        <div class="status-right">
+            <span>📶</span>
+            <span>🔋</span>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <div class="nav-logo">🏠</div>
+        <div class="nav-logo">🌐 cleanhearsolutions.com</div>
+        <div class="nav-icons">
+            <div class="nav-icon">+</div>
+            <div class="nav-icon">📷</div>
+            <div class="nav-icon">⋮</div>
+        </div>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <button class="menu-btn">☰</button>
+        <input type="text" class="search-box" placeholder="buy and get problems, u fresh" readonly>
+        <button class="icon-btn">🔔</button>
+        <button class="icon-btn">👤</button>
+    </div>
+
+    <!-- Welcome Card -->
+    <div class="welcome-card animate-in">
+        <div class="profile-avatar">👤</div>
+        <h2>Welcome Back!</h2>
+        <p>Data4ghana1</p>
+        <div class="badge">🛡️ Sweet guy</div>
+        <div class="balance-label">Current Balance</div>
+        <div class="balance-amount" id="balance">GH₵7.00</div>
+        <button class="load-wallet-btn">📁 Load Wallet</button>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+        <div class="stat-card purple animate-in">
+            <div class="stat-icon">💎</div>
+            <div class="stat-label">Total Sales</div>
+            <div class="stat-value" id="totalSales">GH₵10,013.00</div>
+        </div>
+
+        <div class="stat-card green animate-in">
+            <div class="stat-icon">🛒</div>
+            <div class="stat-label">Total Orders</div>
+            <div class="stat-value" id="totalOrders">413</div>
+        </div>
+
+        <div class="stat-card blue animate-in">
+            <div class="stat-icon">📅</div>
+            <div class="stat-label">Daily Sales</div>
+            <div class="stat-value" id="dailySales">GH₵0.00</div>
+        </div>
+
+        <div class="stat-card pink animate-in">
+            <div class="stat-icon">📊</div>
+            <div class="stat-label">Weekly Sales</div>
+            <div class="stat-value" id="weeklySales">GH₵12.00</div>
+            <div style="font-size: 11px; color: #999; margin-top: 4px;">(Sun - Today)</div>
+        </div>
+    </div>
+
+    <!-- Pills Container -->
+    <div class="pills-container">
+        <div class="pill orange">📞 MTN</div>
+        <div class="pill blue">📡 Telecel</div>
+        <div class="pill green">📱 iShare</div>
+        <div class="pill purple">🏧 AFA</div>
+        <div class="pill red">🔍 Results</div>
+    </div>
+
+    <!-- Sales Overview -->
+    <div class="sales-overview animate-in">
+        <div class="sales-header">
+            <div>
+                <h3>Sales Overview</h3>
+                <div class="sales-date">Mar 15 - Mar 13, 2026</div>
+            </div>
+            <button class="search-btn">🔍</button>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="revenueChart"></canvas>
+        </div>
+
+        <div class="revenue-info">
+            <div class="revenue-dot"></div>
+            <span class="revenue-label">Revenue (GHS)</span>
+        </div>
+        <div class="revenue-day">Monday</div>
+        <div class="revenue-amount">🔵 Revenue: GHS 0.00</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <h3>CLEANHEART</h3>
+        <p>Your trusted partner for data bundles and mobile services</p>
+        <p>
+            <span style="color: #00ff00;">💚</span> Developed by 
+            <a href="#">AWEETCH IT SERVICES</a>
+        </p>
+        <div class="footer-credit">
+            © 2026 CLEANHEART. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        // Dashboard Data Management
+        const dashboardData = {
+            user: 'Data4ghana1',
+            balance: 7.00,
+            totalSales: 10013.00,
+            totalOrders: 413,
+            dailySales: 0.00,
+            weeklySales: 12.00,
+            revenueData: [0, 0, 0, 0, 0, 0, 0]
+        };
+
+        // Format Currency
+        function formatCurrency(amount) {
+            return 'GH₵' + amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        // Initialize Dashboard
+        function initDashboard() {
+            updateStats();
+            drawChart();
+            setupEventListeners();
+        }
+
+        // Update Stats
+        function updateStats() {
+            document.getElementById('balance').textContent = formatCurrency(dashboardData.balance);
+            document.getElementById('totalSales').textContent = formatCurrency(dashboardData.totalSales);
+            document.getElementById('totalOrders').textContent = dashboardData.totalOrders.toLocaleString();
+            document.getElementById('dailySales').textContent = formatCurrency(dashboardData.dailySales);
+            document.getElementById('weeklySales').textContent = formatCurrency(dashboardData.weeklySales);
+        }
+
+        // Draw Revenue Chart
+        function drawChart() {
+            const canvas = document.getElementById('revenueChart');
+            const ctx = canvas.getContext('2d');
+
+            // Set canvas size
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+
+            const width = canvas.width;
+            const height = canvas.height;
+            const padding = 40;
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+            // Clear canvas
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(0, 0, width, height);
+
+            // Draw grid
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const y = padding + (height - padding * 2) * (i / 4);
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+
+            // Draw Y-axis labels
+            ctx.fillStyle = '#999';
+            ctx.font = '11px Arial';
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 4; i++) {
+                const y = padding + (height - padding * 2) * (i / 4);
+                const value = (20 - i * 5);
+                ctx.fillText('GHS ' + value, padding - 10, y + 3);
+            }
+
+            // Draw data points and lines
+            const graphWidth = width - padding * 2;
+            const graphHeight = height - padding * 2;
+            const pointSpacing = graphWidth / (dashboardData.revenueData.length - 1);
+
+            ctx.strokeStyle = '#3b82f6';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+
+            dashboardData.revenueData.forEach((value, index) => {
+                const x = padding + index * pointSpacing;
+                const y = padding + graphHeight - (value / 20) * graphHeight;
+
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+
+            ctx.stroke();
+
+            // Draw points
+            ctx.fillStyle = '#3b82f6';
+            dashboardData.revenueData.forEach((value, index) => {
+                const x = padding + index * pointSpacing;
+                const y = padding + graphHeight - (value / 20) * graphHeight;
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Draw X-axis labels
+            ctx.fillStyle = '#999';
+            ctx.font = '11px Arial';
+            ctx.textAlign = 'center';
+            days.forEach((day, index) => {
+                const x = padding + index * pointSpacing;
+                ctx.fillText(day, x, height - 10);
+            });
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Pill buttons
+            const pills = document.querySelectorAll('.pill');
+            pills.forEach(pill => {
+                pill.addEventListener('click', function() {
+                    pills.forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Search button
+            document.querySelector('.search-btn').addEventListener('click', function() {
+                alert('Filtering sales data...');
+            });
+
+            // Load wallet button
+            document.querySelector('.load-wallet-btn').addEventListener('click', function() {
+                alert('Opening wallet...');
+            });
+
+            // Menu button
+            document.querySelector('.menu-btn').addEventListener('click', function() {
+                alert('Opening menu...');
+            });
+
+            // Navigation icons
+            document.querySelectorAll('.nav-icon').forEach(icon => {
+                icon.addEventListener('click', function() {
+                    console.log('Navigation icon clicked');
+                });
+            });
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            drawChart();
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initDashboard);
+
+        // Simulate real-time updates
+        setInterval(() => {
+            // Simulate revenue data updates
+            dashboardData.revenueData.shift();
+            dashboardData.revenueData.push(Math.random() * 10);
+            drawChart();
+        }, 5000);
+    </script>
 </body>
 </html>
