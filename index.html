@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Premium Online Store</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-icon">🛍️</span>
+                        <span class="logo-text">ShopHub</span>
+                    </a>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search products..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+
+                <!-- Nav Links -->
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="pages/products.html">Products</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+
+                <!-- User Menu -->
+                <div class="user-menu">
+                    <a href="pages/cart.html" class="cart-icon">
+                        🛒 <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <div class="dropdown">
+                        <button class="user-btn" id="userBtn">👤 Account</button>
+                        <div class="dropdown-content" id="userDropdown">
+                            <a href="pages/profile.html">My Profile</a>
+                            <a href="pages/orders.html">My Orders</a>
+                            <a href="#" onclick="logout()">Logout</a>
+                            <hr>
+                            <a href="pages/login.html">Login</a>
+                            <a href="pages/register.html">Register</a>
+                        </div>
+                    </div>
+                    <button class="menu-toggle" id="menuToggle">☰</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to ShopHub</h1>
+            <p>Discover the Best Products at Unbeatable Prices</p>
+            <a href="pages/products.html" class="btn btn-primary btn-large">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="featured-categories">
+        <div class="container">
+            <h2>Shop by Category</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">👕</div>
+                    <h3>Clothing</h3>
+                    <a href="pages/products.html?category=clothing">Explore</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">👠</div>
+                    <h3>Shoes</h3>
+                    <a href="pages/products.html?category=shoes">Explore</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">💼</div>
+                    <h3>Accessories</h3>
+                    <a href="pages/products.html?category=accessories">Explore</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">��</div>
+                    <h3>Electronics</h3>
+                    <a href="pages/products.html?category=electronics">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <div class="products-grid" id="featuredProducts">
+                <!-- Loaded via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Banner -->
+    <section class="promo-banner">
+        <div class="container">
+            <div class="promo-content">
+                <h2>Special Offer!</h2>
+                <p>Get 20% OFF on your first order</p>
+                <code class="promo-code">WELCOME20</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get exclusive deals and updates delivered to your inbox</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About ShopHub</h4>
+                    <p>Your trusted online shopping destination for quality products at great prices.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>Email: support@shophub.com</p>
+                    <p>Phone: 1-800-SHOP-HUB</p>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load featured products
+            loadFeaturedProducts();
+            // Update cart count
+            updateCartCount();
+            // Setup user menu
+            setupUserMenu();
+        });
+
+        function loadFeaturedProducts() {
+            const products = getProducts().slice(0, 8);
+            const container = document.getElementById('featuredProducts');
+            
+            container.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                        ${product.discount ? `<span class="discount-badge">-${product.discount}%</span>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="product-category">${product.category}</p>
+                        <div class="product-rating">
+                            ${'⭐'.repeat(product.rating)}<span class="rating-text">${product.rating}/5</span>
+                        </div>
+                        <div class="product-price">
+                            ${product.oldPrice ? `<span class="old-price">$${product.oldPrice}</span>` : ''}
+                            <span class="current-price">$${product.price}</span>
+                        </div>
+                        <button class="btn btn-small" onclick="addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setupUserMenu() {
+            const userBtn = document.getElementById('userBtn');
+            const dropdown = document.getElementById('userDropdown');
+
+            userBtn.addEventListener('click', () => {
+                dropdown.classList.toggle('show');
+            });
+
+            window.addEventListener('click', (e) => {
+                if (!e.target.matches('.user-btn')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
